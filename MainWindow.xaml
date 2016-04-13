@@ -1,0 +1,41 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UFIP.EngChat"
+        xmlns:ChatPanel="clr-namespace:UFIP.EngChat.Components.ChatPanel" 
+        xmlns:MenuChat="clr-namespace:UFIP.EngChat.Components.Menu" 
+        xmlns:Authentication="clr-namespace:UFIP.EngChat.Components.Authentication"
+        xmlns:Vmb="clr-namespace:UFIP.EngChat.Common.Libraries" x:Class="UFIP.EngChat.MainWindow"
+        mc:Ignorable="d"
+        Title="UFIP Chat" Icon="black_cat_256.ico" Height="675" Width="950" MinHeight="675" MinWidth="850">
+
+    <Grid>
+        <DockPanel LastChildFill="True">
+
+            <Menu Margin="0,0,0,0.4" DockPanel.Dock="Top" Height="25" Background="{x:Null}">
+                <MenuItem Header="Fichier">
+                    <MenuItem Header="Déconnexion"           
+                              Command="{x:Static MenuChat:MenuViewModel.Deconnexion}"/>
+                    <MenuItem Header="Quitter" Command="{x:Static MenuChat:MenuViewModel.Leave}"/>
+                </MenuItem>
+                <MenuItem Header="Options">
+                    <MenuItem Header="Paramètres" Command="{x:Static MenuChat:MenuViewModel.Parameters}">
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+
+            <ContentPresenter Content="{Binding Path=SourceView, UpdateSourceTrigger=PropertyChanged}" Margin="0,4.6,0,0.4">
+                <ContentPresenter.Resources>
+                    <DataTemplate DataType="{x:Type Authentication:LoginViewModel}">
+                        <Authentication:LoginView ></Authentication:LoginView>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type ChatPanel:ChatPanelViewModel}">
+                        <ChatPanel:ChatPanelView></ChatPanel:ChatPanelView>
+                    </DataTemplate>
+                </ContentPresenter.Resources>
+            </ContentPresenter>
+        </DockPanel>
+    </Grid>
+</Window>

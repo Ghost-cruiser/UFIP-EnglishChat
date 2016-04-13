@@ -1,0 +1,44 @@
+﻿<ItemsControl x:Class="UFIP.EngChat.Components.ChatPanel.Conversations.Messages.MessagesPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:src="clr-namespace:S22.Xmpp.Im;assembly=S22.Xmpp" 
+             xmlns:local="clr-namespace:UFIP.EngChat.Components.ChatPanel.Conversations.Messages"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             HorizontalContentAlignment="Stretch">
+
+        <ItemsControl.Template>
+            <ControlTemplate>
+                <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto" Padding="{TemplateBinding Padding}">
+                    <ItemsPresenter />
+                </ScrollViewer>
+            </ControlTemplate>
+        </ItemsControl.Template>
+    <ItemsControl.Resources>
+        <DataTemplate x:Key="OthersMessages" DataType="{x:Type src:Message}">
+            <Grid Margin="0,0,0,0">
+                <Grid HorizontalAlignment="Left">
+                    <Border Padding="5" BorderThickness="0" Margin="6,5,0,5" Background="#FF26BFA1" CornerRadius="10" VerticalAlignment="Center">
+                        <TextBox x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Body}"  IsReadOnly="True" Background="#FF26BFA1" BorderThickness="0"/>
+                    </Border>
+                    <Polygon Points="8,0 0,5, 8,10" Stroke="Black" StrokeThickness="0" Fill="#FF26BFA1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OwnMessages" DataType="{x:Type src:Message}">
+            <Grid Margin="0,0,0,0">
+                <Grid HorizontalAlignment="Right" Margin="10,0,10,0">
+                    <Border Padding="10" BorderThickness="0" Margin="0,5,6,5" Background="#FF79FFE5" CornerRadius="10" VerticalAlignment="Center">
+                        <TextBox x:Name="textBlock1" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Body}" Background="#FF79FFE5" IsReadOnly="True" BorderThickness="0" />
+                    </Border>
+                    <Polygon Points="0,0 8,5, 0,10" Stroke="Black" StrokeThickness="0" Fill="#FF79FFE5" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        
+    </ItemsControl.Resources>
+    
+</ItemsControl>

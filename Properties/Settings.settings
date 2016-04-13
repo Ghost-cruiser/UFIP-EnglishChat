@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="UFIP.EngChat.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Host" Type="System.String" Scope="User">
+      <Value Profile="(Default)">msi-ghost</Value>
+    </Setting>
+    <Setting Name="FolderRecord" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\Public\Documents\Tests Anglais\</Value>
+    </Setting>
+    <Setting Name="Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5222</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
