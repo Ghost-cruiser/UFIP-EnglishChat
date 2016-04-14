@@ -1,5 +1,9 @@
 ﻿using S22.Xmpp;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows.Data;
+using UFIP.EngChat.Common.Models;
 
 namespace UFIP.EngChat.Common.Sources
 {
@@ -16,14 +20,22 @@ namespace UFIP.EngChat.Common.Sources
         /// <value>
         /// All contacts.
         /// </value>
-        public Components.Contacts.ContactList AllContacts { get; set; }
+        public ObservableCollection<UserViewModel> AllContacts { get; set; }
+
+        /// <summary>
+        /// Gets or sets the connected contacts.
+        /// </summary>
+        /// <value>
+        /// The connected contacts.
+        /// </value>
+        public CollectionViewSource ConnectedContacts { get; set; }
 
         private static ContactsSource _center;
         /// <summary>
-        /// Gets the center.
+        /// Gets the service. Singleton implementation.
         /// </summary>
         /// <value>
-        /// The center.
+        /// The ContactsSource.
         /// </value>
         public static ContactsSource Center
         {
@@ -39,14 +51,14 @@ namespace UFIP.EngChat.Common.Sources
             }
         }
 
-        private Models.User _selectedContact;
+        private Models.UserViewModel _selectedContact;
         /// <summary>
-        /// Gets or sets the selected contact.
+        /// Gets or sets the selected contact. Implements INotifyPropertyChanged.
         /// </summary>
         /// <value>
         /// The selected contact.
         /// </value>
-        public Models.User SelectedContact
+        public Models.UserViewModel SelectedContact
         {
             get
             {
@@ -68,9 +80,23 @@ namespace UFIP.EngChat.Common.Sources
         private ContactsSource()
         {
             // TODO change CTOR in contactList 
-            AllContacts = new Components.Contacts.ContactList();
+            AllContacts = new ObservableCollection<UserViewModel>();
+
+            ConnectedContacts = new CollectionViewSource { Source = AllContacts, IsLiveFilteringRequested = true };
+            ConnectedContacts.LiveFilteringProperties.Add("CurrentStatus");
+            ConnectedContacts.Filter += ConnectedContacts_Filter;
+
         }
-        #endregion  
+
+        private void ConnectedContacts_Filter(object sender, FilterEventArgs e)
+        {
+            var cont = e.Item as Models.UserViewModel;
+            if (cont != null && cont.CurrentStatus.Availability != S22.Xmpp.Im.Availability.Offline)
+                e.Accepted = true;
+            else
+                e.Accepted = false;
+        }
+        #endregion
 
         #region METHODS        
         /// <summary>
@@ -78,7 +104,7 @@ namespace UFIP.EngChat.Common.Sources
         /// </summary>
         /// <param name="jid">The jid.</param>
         /// <returns>A user in the Contact List.</returns>
-        public Models.User GetUser(Jid jid)
+        public Models.UserViewModel GetUser(Jid jid)
         {
             foreach (var contact in AllContacts)
             {
@@ -91,7 +117,7 @@ namespace UFIP.EngChat.Common.Sources
             // Create a temporary contact if a non-roster user creates a conversation.
             // Allows administrator to talk to anyone.
             // Change ctor in user
-            var tempContact = new Models.User(jid, "");
+            var tempContact = new Models.UserViewModel(jid, "");
 
             AllContacts.Add(tempContact);
 
@@ -119,10 +145,21 @@ namespace UFIP.EngChat.Common.Sources
         /// <param name="status">The new status.</param>
         public void UpdateContact(Jid jid, S22.Xmpp.Im.Status status)
         {
-            foreach(var contact in AllContacts)
+            if (AllContacts.Count != 0)
             {
-                if (jid.Equals(contact.Jid))
-                    contact.CurrentStatus = status;
+                foreach (var contact in AllContacts)
+                {
+                    if (jid.GetBareJid() == contact.Jid.GetBareJid())
+                    {
+                        contact.CurrentStatus = new S22.Xmpp.Im.Status(status.Availability, status.Messages, status.Priority);
+
+                        break;
+                    }
+                }
+            }
+            else
+            {
+
             }
         }
         #endregion

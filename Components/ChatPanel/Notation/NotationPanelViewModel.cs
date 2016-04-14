@@ -47,13 +47,15 @@ namespace UFIP.EngChat.Components.ChatPanel.Notation
         }
 
         /// <summary>
-        /// Gets the record command.
+        /// Exposes the record command.
         /// </summary>
         /// <value>
         /// Command : RecordConversation() - CanRecord().
         /// </value>
         public ICommand Record { get; private set; }
-        #endregion        
+        #endregion
+
+        #region CTOR        
         /// <summary>
         /// Initializes a new instance of the <see cref="NotationPanelViewModel"/> class.
         /// </summary>
@@ -63,6 +65,8 @@ namespace UFIP.EngChat.Components.ChatPanel.Notation
                 param => RecordConversation(),
                 param => CanRecord());
         }
+        #endregion
+
         #region METHODS        
         /// <summary>
         /// Records the conversation.
@@ -94,7 +98,9 @@ namespace UFIP.EngChat.Components.ChatPanel.Notation
         {
             return true;
         }
+        #endregion
 
+        #region VIEW-MODEL-BASE
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>

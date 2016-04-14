@@ -10,15 +10,15 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black" Offset="1"/>
-                <GradientStop Color="#FF2A69D4"/>
+                <GradientStop Color="#F9FBFB" Offset="1"/>
+                <GradientStop Color="#FF308BE8" Offset="0.619"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="260" Width="375" Margin="250,140,325.4,100">
-            <TextBox x:Name="tb_username" Text="{Binding Username}" Height="40" Margin="44,0,23,200" TextWrapping="Wrap" VerticalAlignment="Bottom" Background="{x:Null}" BorderThickness="0,0,0,1" FontFamily="Cooper Black" FontSize="18.667" Foreground="#FFF4F4F4"/>
-            <PasswordBox x:Name="pb_password" Height="40" Margin="47,0,24,140" VerticalAlignment="Bottom" Background="{x:Null}" BorderThickness="0,0,0,1" Foreground="#FFF4F1F1"/>
+            <TextBox x:Name="tb_username" Text="{Binding Username}" Height="40" Margin="44,0,23,200" BorderBrush="#3A4A4D" TextWrapping="Wrap" VerticalAlignment="Bottom" Background="{x:Null}" BorderThickness="0,0,0,1" FontFamily="Cooper Black" FontSize="18.667" Foreground="#FFF4F4F4"/>
+            <PasswordBox x:Name="pb_password" Height="40" Margin="47,0,24,140" VerticalAlignment="Bottom" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#3A4A4D" Foreground="#FFF4F1F1"/>
             <Button x:Name="btn_connection" Content="Connexion" Margin="255,0,24,80"
-                    Command="{Binding LoginAction}" CommandParameter="{Binding ElementName=pb_password}" Background="#FF525252" BorderBrush="{x:Null}" Foreground="#FFF4F2F2" FontFamily="Cooper Black" Height="40" VerticalAlignment="Bottom" />
+                    Command="{Binding LoginAction}" CommandParameter="{Binding ElementName=pb_password}" Background="#3A4A4D" BorderBrush="{x:Null}" Foreground="#FFF4F2F2" FontFamily="Cooper Black" Height="40" VerticalAlignment="Bottom" />
         </Grid>
         <Label x:Name="label" Content="UFIP - CHAT" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="75" Margin="250,60,0,0" VerticalAlignment="Top" Width="375" FontFamily="Modern No. 20" FontSize="48" Foreground="#FFFDFDFD"/>
     </Grid>

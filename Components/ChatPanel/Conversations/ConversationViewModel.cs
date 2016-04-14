@@ -1,7 +1,6 @@
 ﻿using System;
 using S22.Xmpp.Im;
 using System.ComponentModel;
-using UFIP.EngChat.Components.Contacts;
 using UFIP.EngChat.Common.Libraries;
 using System.Windows.Input;
 using UFIP.EngChat.Common.Sources;
@@ -25,7 +24,7 @@ namespace UFIP.EngChat.Components.ChatPanel.Conversations
         /// <value>
         /// The current contact.
         /// </value>
-        public Contacts.UserViewModel CurrentContact { get; set; }
+        public UserViewModel CurrentContact { get; set; }
 
         /// <summary>
         /// Gets or sets the messages.
@@ -105,10 +104,10 @@ namespace UFIP.EngChat.Components.ChatPanel.Conversations
         /// Initializes a new instance of the <see cref="ConversationViewModel"/> class.
         /// </summary>
         /// <param name="contact">The contact the conversation is currently with.</param>
-        public ConversationViewModel(User contact)
+        public ConversationViewModel(UserViewModel contact)
         {
             Messages = new ObservableCollection<Message>();
-            CurrentContact = new Contacts.UserViewModel(contact);
+            CurrentContact = contact;
             MessageWritten = "";
 
             if (UserSource.Center.Role == Roles.Professeur)

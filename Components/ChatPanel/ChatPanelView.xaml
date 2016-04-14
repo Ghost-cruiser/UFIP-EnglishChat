@@ -17,16 +17,10 @@
             ObjectType="{x:Static Context:ConversationsSource.Center}">
         </ObjectDataProvider>
     </UserControl.Resources>
-    
+
     <DockPanel LastChildFill="True">
-        
-        <Grid DockPanel.Dock="Left" Width="250" >
-            <Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                    <GradientStop Color="#FFFCFBFD" Offset="1"/>
-                    <GradientStop Color="#FF09108B"/>
-                </LinearGradientBrush>
-            </Grid.Background>
+
+        <Grid DockPanel.Dock="Left" Width="250" Background="#308AE8" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="6*"/>
                 <RowDefinition Height="7*"/>
@@ -50,29 +44,17 @@
                    Margin="78,12,57.2,18"
                    Width="140" FontFamily="Cooper Black" FontSize="24" Foreground="#FFF4EFEF"/>
 
-            <Button x:Name="btn_contacts" 
-                    Content="CONTACTS" 
-                    Height="25" 
-                    MinWidth="75" 
-                    Margin="25,0,0,19.6" 
-                    HorizontalAlignment="Left" VerticalAlignment="Bottom" 
-                    Background="{x:Null}" BorderThickness="0" Grid.Row="1" FontFamily="Mongolian Baiti" FontSize="16"
-                    Command="{Binding Path=ViewContact}"/>
-            
-            <Button x:Name="btn_salles" Content="SALLES"     Height="25" MinWidth="75" Margin="0,0,25,19.6"
-                    VerticalAlignment="Bottom" Background="{x:Null}" BorderThickness="0" Grid.Row="1" 
-                    FontFamily="Mongolian Baiti" FontSize="16" HorizontalAlignment="Right" Width="95"/>
-
-            <ListBox ItemsSource="{Binding Source={x:Static Context:ContactsSource.Center}, Path=AllContacts }" SelectedItem="{Binding Path=SelectedContact}" Grid.Row="2" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" Background="{x:Null}">
+            <ListBox ItemsSource="{Binding Source={x:Static Context:ContactsSource.Center}, Path=ConnectedContacts.View }" SelectedItem="{Binding Path=SelectedContact}" Grid.Row="2" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" Background="{x:Null}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Label x:Name="lbl_Username" Content="{Binding Name}" HorizontalAlignment="Left" Height="30" Margin="50,0,0,0" VerticalAlignment="Center" FontWeight="Bold" FontFamily="Modern No. 20" FontSize="14.667"/>
-                                <Image x:Name="image" HorizontalAlignment="Left" Height="35" Margin="0,0,0,0" VerticalAlignment="Center" Width="35" Source="{Binding Path=UserAvatar}"/>
+                            <Image x:Name="image" HorizontalAlignment="Left" Height="35" Margin="0,0,0,0" VerticalAlignment="Center" Width="35" Source="{Binding Path=UserAvatar}"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Label x:Name="label" Content="CONTACTS" HorizontalAlignment="Center" Height="45" Margin="25,15,20,9.6" Grid.Row="1" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="205" FontSize="21.333" FontWeight="Bold" FontFamily="Mongolian Baiti" Foreground="#FFF9FBFB" BorderBrush="#FFF9FBFB" BorderThickness="0,1"/>
         </Grid>
 
         <ContentPresenter Content="{Binding Path=ServiceConversations.SelectedConversation, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">

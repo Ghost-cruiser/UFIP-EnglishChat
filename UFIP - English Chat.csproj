@@ -132,9 +132,7 @@
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\Authentication\LoginViewModel.cs" />
-    <Compile Include="Common\Models\ContactList.cs" />
-    <Compile Include="Components\ChatPanel\Contacts\UserViewModel.cs" />
-    <Compile Include="Common\Models\User.cs" />
+    <Compile Include="Common\Models\UserViewModel.cs" />
     <Compile Include="Components\ChatPanel\Contacts\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>

@@ -1,42 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
 namespace UFIP.EngChat.Components.Authentication
 {
     /// <summary>
-    /// Logique d'interaction pour Login.xaml
+    /// LoginView.xaml interacts with its datacontext binding the username (:Username), 
+    /// and passing its passwordBox to the bound command (:LoginAction).
     /// </summary>
     public partial class LoginView : UserControl
     {
-        public delegate void AuthHandler(string username, string password);
-        public event AuthHandler Authentication;
-         
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoginView"/> class.
+        /// </summary>
         public LoginView()
         {
             InitializeComponent();
-            //DataContext = new LoginViewModel();
-        }
-
-        protected virtual void OnAuthentication()
-        {
-            Authentication(tb_username.Text, pb_password.Password);
-        }
-
-        private void btn_connection_Click(object sender, RoutedEventArgs e)
-        {
-            OnAuthentication();
         }
     }
 }

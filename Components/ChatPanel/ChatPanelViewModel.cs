@@ -3,6 +3,7 @@ using UFIP.EngChat.Common.Sources;
 using UFIP.EngChat.Common.Libraries;
 using UFIP.EngChat.Common.Models;
 using System;
+using System.Windows.Data;
 
 namespace UFIP.EngChat.Components.ChatPanel
 {
@@ -19,7 +20,7 @@ namespace UFIP.EngChat.Components.ChatPanel
         /// <value>
         /// The current user.
         /// </value>
-        public User ConnectedUser { get; private set; }
+        public UserViewModel ConnectedUser { get; private set; }
             = Common.Sources.UserSource.Center.ConnectedUser;
 
         /// <summary>
@@ -31,14 +32,14 @@ namespace UFIP.EngChat.Components.ChatPanel
         public ConversationsSource ServiceConversations { get; private set; }
              = ConversationsSource.Center;
 
-        private User _selectedContact;
+        private UserViewModel _selectedContact;
         /// <summary>
         /// Gets or sets the selected contact.
         /// </summary>
         /// <value>
         /// The selected contact.
         /// </value>
-        public User SelectedContact
+        public UserViewModel SelectedContact
         {
       
             get
@@ -52,66 +53,19 @@ namespace UFIP.EngChat.Components.ChatPanel
                 UpdateSelectedConversation();
             }
         }
+        #endregion
 
-        private ViewModelBase _viewSource;
+        #region CONSTRUCTORS
+        // TODO : implement retrieve true user avatar        
         /// <summary>
-        /// Gets the view source. Implements OnPropertyChanged.
+        /// Initializes a new instance of the <see cref="ChatPanelViewModel"/> class.
         /// </summary>
-        /// <value>
-        /// The view-model to display.
-        /// </value>
-        public ViewModelBase ViewSource
+        public ChatPanelViewModel()
         {
-            get
-            {
-                return _viewSource;
-            }
-
-            private set
-            {
-                _viewSource = value;
-                OnPropertyChanged("ViewSource");
-            }
         }
         #endregion
 
-        #region COMMANDS
-        private ICommand _command;
-        /// <summary>
-        /// Gets the ViewContact.
-        /// </summary>
-        /// <value>
-        /// Command : SwitchViewSource() - if IsContactListSelected()
-        /// </value>
-        public ICommand ViewContact
-        {
-            get
-            {
-                if (_command == null)
-                {
-                    _command = new RelayCommand(
-                        param => SwitchViewSource(),
-                        param => IsContactListSelected()
-                    );
-                }
-                return _command;
-            }
-            private set
-            {
-                _command = value;
-            }
-        }
-
-        private bool IsContactListSelected()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void SwitchViewSource()
-        {
-            throw new NotImplementedException();
-        }
-
+        #region METHODS
         /// <summary>
         /// Updates the selected conversation.
         /// </summary>
@@ -121,12 +75,7 @@ namespace UFIP.EngChat.Components.ChatPanel
         }
         #endregion
 
-        #region CONSTRUCTORS
-        // TODO : implement retrieve true user avatar
-
-        #endregion
-
-        #region METHODS            
+        #region VIEW-MODEL-BASE            
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>

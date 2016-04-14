@@ -46,7 +46,7 @@
                             VerticalAlignment="Stretch"
                             x:Name="listBox"
                             ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
-                            BorderBrush="#FF0D2B85" BorderThickness="0,30,0,0" 
+                            BorderBrush="#4A3DEB" BorderThickness="0,30,0,0" 
                             ScrollViewer.VerticalScrollBarVisibility="Auto"
                             Height="{Binding ElementName=gd_grid, Path=ActualHeight}">
             </Messages:MessagesPanel>

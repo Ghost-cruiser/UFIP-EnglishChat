@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="300">
     <Grid>
-        <Button x:Name="button" Content="Enregistrer" Command="{Binding Path=Record}" HorizontalAlignment="Left" Height="50" Margin="145,35,0,0" VerticalAlignment="Top" Width="140" BorderThickness="0" Background="{Binding Path=Color, UpdateSourceTrigger=PropertyChanged, TargetNullValue= #FF1B24D4}" Foreground="White"/>
+        <Button x:Name="button" Content="Enregistrer" Command="{Binding Path=Record}" HorizontalAlignment="Left" Height="50" Margin="145,35,0,0" VerticalAlignment="Top" Width="140" BorderThickness="0" Background="{Binding Path=Color, UpdateSourceTrigger=PropertyChanged, TargetNullValue= #4A3DEB}" Foreground="White"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="45" Margin="35,40,0,0" TextWrapping="Wrap" Text="{Binding Path=Note, TargetNullValue='00'}" VerticalAlignment="Top" Width="50"/>
         <Label x:Name="label" Content="/ 20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="45" Margin="90,40,0,0" VerticalAlignment="Top" Width="45" FontSize="13.333" FontWeight="Bold"/>
         <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="55" Margin="30,100,0,0" TextWrapping="Wrap" Text="{Binding Path=Message}" VerticalAlignment="Top" Width="255" Background="{x:Null}"/>

@@ -1,6 +1,6 @@
-﻿
-using S22.Xmpp.Client;
+﻿using S22.Xmpp.Client;
 using S22.Xmpp.Im;
+using System.Threading.Tasks;
 using UFIP.EngChat.Common.Sources;
 
 namespace UFIP.EngChat.Common.Core
@@ -13,8 +13,7 @@ namespace UFIP.EngChat.Common.Core
     public class XmppService
     {
         #region PROPERTIES
-        private XmppClient LibClient { get; set; }
-
+        private XmppClient LibClient;
         /// <summary>
         /// Exposes one xmpp client.
         /// </summary>
@@ -39,6 +38,10 @@ namespace UFIP.EngChat.Common.Core
         /// </value>
         private static int Port { get { return Properties.Settings.Default.Port; } }
 
+        private bool ContextsHydrated { get; set; } = false;
+
+        private System.Collections.Generic.List<StatusEventArgs> AwaitingStatus { get; set; } 
+            = new System.Collections.Generic.List<StatusEventArgs>();
         #endregion
 
         #region CONSTRUCTORS
@@ -61,7 +64,12 @@ namespace UFIP.EngChat.Common.Core
             LibClient.Connect();
         }
 
-
+        /// <summary>
+        /// Initializes the client with the specified username and password.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns>The XMPP service.</returns>
         public static XmppService Initialize(string username, string password)
         {
             if (Client == null)
@@ -75,34 +83,11 @@ namespace UFIP.EngChat.Common.Core
 
                 if (!Client.LibClient.Authenticated)
                     Client.LibClient.Authenticate(username, password);
-
-             
             }
 
             Client.HydrateContexts();
 
             return Client;
-        }
-
-        private void HydrateContexts()
-        {
-            var roster = LibClient.GetRoster();
-
-            var contactList = ContactsSource.Center.AllContacts;
-
-            var usercenter = UserSource.Center;
-            usercenter.ConnectedUser = new Models.User(LibClient.Jid, LibClient.Username);
-
-            foreach (var rosterItem in roster)
-            {
-
-                if (rosterItem.Jid.Node == "echoprofesseurs")
-                {
-                    usercenter.Role = Roles.Professeur;
-                }
-
-                contactList.Add(rosterItem);
-            }
         }
         #endregion
 
@@ -128,8 +113,36 @@ namespace UFIP.EngChat.Common.Core
             ConversationsSource.Center.Dispose();
             UserSource.Center.Dispose();
 
-            XmppService.Client = null;
+            Client = null;
 
+        }
+
+        /// <summary>
+        /// Hydrates the contexts : provide all datas to the singletons providing the contexts of the application.
+        /// </summary>
+        private void HydrateContexts()
+        {
+            var roster = LibClient.GetRoster();
+
+            var contactList = ContactsSource.Center.AllContacts;
+
+            var usercenter = UserSource.Center;
+            usercenter.ConnectedUser = new Models.UserViewModel(LibClient.Jid, LibClient.Username);
+
+            foreach (var rosterItem in roster)
+            {
+
+                if (rosterItem.Jid.Node == "echoprofesseurs")
+                {
+                    usercenter.Role = Roles.Professeur;
+                }
+
+                contactList.Add(rosterItem);
+            }
+
+            ContextsHydrated = true;
+
+            LoadAwaitingStatus();
         }
         #endregion
 
@@ -142,7 +155,10 @@ namespace UFIP.EngChat.Common.Core
         /// <param name="e">The <see cref="MessageEventArgs"/> instance containing the event data.</param>
         private void HandleMessage(object sender, MessageEventArgs e)
         {
-            ConversationsSource.Center.ReceiveMessage(e.Message, e.Jid);
+            Task task = new Task(delegate {
+                ConversationsSource.Center.ReceiveMessage(e.Message, e.Jid);
+            });
+            task.Start();
         }
 
         /// <summary>
@@ -152,7 +168,10 @@ namespace UFIP.EngChat.Common.Core
         /// <param name="e">The <see cref="RosterUpdatedEventArgs"/> instance containing the event data.</param>
         private void LibClient_RosterUpdated(object sender, RosterUpdatedEventArgs e)
         {
-            ContactsSource.Center.UpdateList(e.Removed, e.Item);
+            Task task = new Task(delegate {
+                ContactsSource.Center.UpdateList(e.Removed, e.Item);
+            });
+            task.Start(); 
         }
 
         /// <summary>
@@ -162,7 +181,29 @@ namespace UFIP.EngChat.Common.Core
         /// <param name="e">The <see cref="StatusEventArgs"/> instance containing the event data.</param>
         private void LibClient_StatusChanged(object sender, StatusEventArgs e)
         {
-            ContactsSource.Center.UpdateContact(e.Jid, e.Status);
+            if (ContextsHydrated)
+            {
+                    ContactsSource.Center.UpdateContact(e.Jid, e.Status);
+            }
+            else
+                AwaitingStatus.Add(e);
+        }
+
+        private void loadAwaitingStatus()
+        {
+            foreach (var e in AwaitingStatus)
+            {
+                ContactsSource.Center.UpdateContact(e.Jid, e.Status);
+            }
+
+            AwaitingStatus = null;
+        }
+        /// <summary>
+        /// Load the awaiting status threw a task using loadAwaitingStatus.
+        /// </summary>
+        private void LoadAwaitingStatus()
+        {
+                loadAwaitingStatus();
         }
         #endregion
 

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using UFIP.EngChat.Common.Core;
@@ -11,7 +7,7 @@ using UFIP.EngChat.Common.Libraries;
 namespace UFIP.EngChat.Components.Authentication
 {
     /// <summary>
-    /// 
+    /// ViewModel for LoginView.xaml : handles connexion to the server.
     /// </summary>
     /// <seealso cref="UFIP.EngChat.Common.Libraries.ViewModelBase" />
     public class LoginViewModel : ViewModelBase
@@ -26,10 +22,10 @@ namespace UFIP.EngChat.Components.Authentication
         public string Username { get; set; }
 
         /// <summary>
-        /// Gets the login action.
+        /// Exposes the command that allow to log in.
         /// </summary>
         /// <value>
-        /// The login action.
+        /// Command : Login(passwordBox) - CanLogin()
         /// </value>
         public ICommand LoginAction { get; private set; }
 
@@ -61,7 +57,11 @@ namespace UFIP.EngChat.Components.Authentication
         }
         #endregion
 
-        #region METHODS
+        #region METHODS        
+        /// <summary>
+        /// Login using the password of the passwordBox.
+        /// </summary>
+        /// <param name="parameter">The passwordBox of the view.</param>
         private void Login(object parameter)
         {
             var passbox = parameter as System.Windows.Controls.PasswordBox;
@@ -79,7 +79,10 @@ namespace UFIP.EngChat.Components.Authentication
             }
            
         }
-
+        /// <summary>
+        /// Determines whether this instance can login.
+        /// </summary>
+        /// <returns> <c>true</c> if the username is not null, neither empty or white spaces only ; otherwise, <c>false</c></returns>
         private bool CanLogin()
         {
             return !(string.IsNullOrWhiteSpace(Username));

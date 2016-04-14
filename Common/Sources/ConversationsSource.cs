@@ -60,7 +60,7 @@ namespace UFIP.EngChat.Common.Sources
             {
                 if (_selectedConversation != null && AllConversations != null)
                 {
-
+                    // Update the conversation in the source
                     var conv = FindByJid(_selectedConversation.CurrentContact.Jid);
                     if (conv != null)
                         conv.Messages = _selectedConversation.Messages.ToList();
@@ -109,7 +109,7 @@ namespace UFIP.EngChat.Common.Sources
         /// Creates a conversation for a contact.
         /// </summary>
         /// <param name="contact">The contact.</param>
-        public void CreateConversation(User contact)
+        public void CreateConversation(UserViewModel contact)
         {
             AllConversations.Add(new Conversation(contact));
         }
@@ -119,20 +119,23 @@ namespace UFIP.EngChat.Common.Sources
         /// Modification of the selected conversation must use this fonction
         /// </summary>
         /// <param name="contact">The contact to chat with.</param>
-        public void SelectConversation(User contact)
+        public void SelectConversation(UserViewModel contact)
         {
-            var conversation = FindByJid(contact.Jid);
-
-            if (conversation != null)
+            if (contact != null)
             {
-                SelectedConversation = conversation;
-            }
+                var conversation = FindByJid(contact.Jid);
 
-            else
-            {
-                conversation = new Conversation(contact);
-                AllConversations.Add(conversation);
-                SelectedConversation = conversation;
+                if (conversation != null)
+                {
+                    SelectedConversation = conversation;
+                }
+
+                else
+                {
+                    conversation = new Conversation(contact);
+                    AllConversations.Add(conversation);
+                    SelectedConversation = conversation;
+                }
             }
         }
 
