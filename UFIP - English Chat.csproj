@@ -183,6 +183,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="obj\UFIP - Chat.rar" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -196,9 +197,7 @@
   <ItemGroup>
     <Resource Include="black_cat_256.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\ChatPanel\Rooms\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\default_avatar.png" />
   </ItemGroup>

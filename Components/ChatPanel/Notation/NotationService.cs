@@ -32,17 +32,17 @@ namespace UFIP.EngChat.Components.ChatPanel.Notation
             // Add the name of the speaker once for every messages in a row
             foreach (var mess in messages)
             {
-                if (mess.From == jid)
+                if (mess.From.GetBareJid() == jid.GetBareJid())
                 {
                     if (isTeacherLastSpeaker)
                     {
-                        text.Add(contactName + " : ");
+                        text.Add("\r\n " + contactName + " : ");
                         isTeacherLastSpeaker = false;
                     }
                 }
                 else if (!isTeacherLastSpeaker)
                 {
-                    text.Add("\r\rVous : ");
+                    text.Add("\r\n Vous : ");
                     isTeacherLastSpeaker = true;
                 }
 
