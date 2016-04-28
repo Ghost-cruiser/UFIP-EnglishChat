@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
+using UFIP.EngChat.Common.Libraries;
 using UFIP.EngChat.Common.Models;
 
 namespace UFIP.EngChat.Common.Sources
@@ -108,7 +109,7 @@ namespace UFIP.EngChat.Common.Sources
         {
             foreach (var contact in AllContacts)
             {
-                if (jid.Equals(contact.Jid))
+                if (jid.GetBareJid() == contact.Jid.GetBareJid())
                 {
                     return contact;
                 }
@@ -119,7 +120,7 @@ namespace UFIP.EngChat.Common.Sources
             // Change ctor in user
             var tempContact = new Models.UserViewModel(jid, "");
 
-            AllContacts.Add(tempContact);
+            UICollection.AddOnUI(AllContacts, tempContact);
 
             return tempContact;
 
@@ -133,9 +134,9 @@ namespace UFIP.EngChat.Common.Sources
         public void UpdateList(bool removed, S22.Xmpp.Im.RosterItem item)
         {
             if (removed)
-                AllContacts.Remove(item);
+                UICollection.AddOnUI(AllContacts, item);
             else
-                AllContacts.Add(item);
+                UICollection.RemoveOnUI(AllContacts, item);
         }
 
         /// <summary>
@@ -164,16 +165,31 @@ namespace UFIP.EngChat.Common.Sources
         }
         #endregion
 
-        #region METHODS        
+        #region VIEW-MODEL-BASE        
+        private bool disposedValue = false; // Pour détecter les appels redondants
+
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            Center = null;
-            AllContacts = null;
-            SelectedContact = null;
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: supprimer l'état managé (objets managés).
+                    if (SelectedContact != null)
+                        SelectedContact.Dispose();
+                }
+
+                // TODO: libérer les ressources non managées (objets non managés) et remplacer un finaliseur ci-dessous.
+                // TODO: définir les champs de grande taille avec la valeur Null.
+                AllContacts = null;
+                ConnectedContacts = null;
+
+                disposedValue = true;
+            }
+
         }
         #endregion
     }

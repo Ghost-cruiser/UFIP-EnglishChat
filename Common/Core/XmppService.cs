@@ -1,6 +1,10 @@
 ﻿using S22.Xmpp.Client;
 using S22.Xmpp.Im;
+using System;
+using System.Net.Security;
+using System.Reflection;
 using System.Threading.Tasks;
+using System.Windows;
 using UFIP.EngChat.Common.Sources;
 
 namespace UFIP.EngChat.Common.Core
@@ -10,7 +14,7 @@ namespace UFIP.EngChat.Common.Core
     /// Singleton exposing the xmpp library. Handles its connection and its events.
     /// Fills the contexts
     /// </summary>
-    public class XmppService
+    public class XmppService : IDisposable
     {
         #region PROPERTIES
         private XmppClient LibClient;
@@ -51,15 +55,27 @@ namespace UFIP.EngChat.Common.Core
             LibClient = new XmppClient(Hostname, Port, false);
             LibClient.Connect();
         }
+        private MethodInfo method { get; set; }
+        private RemoteCertificateValidationCallback cb = delegate {
+            return true;
+        };
 
         private XmppService(string username, string password)
         {
             // TODO : Replace by conf
             LibClient = new XmppClient(Hostname, username, password, Port, false);
 
+
             LibClient.Message += HandleMessage;
             LibClient.RosterUpdated += LibClient_RosterUpdated;
             LibClient.StatusChanged += LibClient_StatusChanged;
+
+            if(!LibClient.Authenticated)
+            {
+                LibClient = new XmppClient(Hostname, Port, false);
+                LibClient.Connect();
+                LibClient.Authenticate(username, password);
+            }
 
             LibClient.Connect();
         }
@@ -205,6 +221,50 @@ namespace UFIP.EngChat.Common.Core
         {
                 loadAwaitingStatus();
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // Pour détecter les appels redondants
+
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    Client.Disconnect();
+                }
+
+                // TODO: libérer les ressources non managées (objets non managés) et remplacer un finaliseur ci-dessous.
+                // TODO: définir les champs de grande taille avec la valeur Null.
+                Client = null;
+                ContextsHydrated = false;
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: remplacer un finaliseur seulement si la fonction Dispose(bool disposing) ci-dessus a du code pour libérer les ressources non managées.
+        // ~XmppService() {
+        //   // Ne modifiez pas ce code. Placez le code de nettoyage dans Dispose(bool disposing) ci-dessus.
+        //   Dispose(false);
+        // }
+
+        // Ce code est ajouté pour implémenter correctement le modèle supprimable.        
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        public void Dispose()
+        {
+            // Ne modifiez pas ce code. Placez le code de nettoyage dans Dispose(bool disposing) ci-dessus.
+            Dispose(true);
+            // TODO: supprimer les marques de commentaire pour la ligne suivante si le finaliseur est remplacé ci-dessus.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
         #endregion
 
     }

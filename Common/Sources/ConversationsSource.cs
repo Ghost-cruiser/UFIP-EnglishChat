@@ -1,4 +1,4 @@
-﻿using S22.Xmpp;
+﻿    using S22.Xmpp;
 using S22.Xmpp.Im;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -88,7 +88,8 @@ namespace UFIP.EngChat.Common.Sources
         /// <param name="jid">The jid of the sender.</param>
         internal void ReceiveMessage(Message message, Jid jid)
         {
-            if (jid.Node.Equals(SelectedConversation.CurrentContact.Jid.Node))
+            if (SelectedConversation != null && 
+                jid.Node.Equals(SelectedConversation.CurrentContact.Jid.Node))
             {
                 SelectedConversation.AddMessage(message);
             }
@@ -101,7 +102,7 @@ namespace UFIP.EngChat.Common.Sources
                     conversation.Messages.Add(message);
                 }
                 else
-                    CreateConversation(ContactsSource.Center.GetUser(jid));
+                    CreateConversation(ContactsSource.Center.GetUser(jid), message);
             }
         }
 
@@ -109,9 +110,12 @@ namespace UFIP.EngChat.Common.Sources
         /// Creates a conversation for a contact.
         /// </summary>
         /// <param name="contact">The contact.</param>
-        public void CreateConversation(UserViewModel contact)
+        /// <param name="message">The message.</param>
+        public void CreateConversation(UserViewModel contact, Message message)
         {
-            AllConversations.Add(new Conversation(contact));
+            var conversation = new Conversation(contact);
+            conversation.Messages.Add(message);
+            AllConversations.Add(conversation);
         }
 
         /// <summary>
@@ -144,16 +148,32 @@ namespace UFIP.EngChat.Common.Sources
             return AllConversations.Where(
                         t => t.CurrentContact.Jid.Node.Equals(jid.Node)).FirstOrDefault();
         }
+        #endregion
+
+
+        #region VIEW-MODEL-BASE        
+        private bool disposedValue = false; // Pour détecter les appels redondants
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-            Center = null;
-            AllConversations = null;
-            SelectedConversation = null;
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: supprimer l'état managé (objets managés).
+                }
+
+                // TODO: libérer les ressources non managées (objets non managés) et remplacer un finaliseur ci-dessous.
+                // TODO: définir les champs de grande taille avec la valeur Null.
+                AllConversations = null;
+                SelectedConversation = null;
+
+                disposedValue = true;
+            }
+
         }
         #endregion
     }

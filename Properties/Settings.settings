@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Host" Type="System.String" Scope="User">
-      <Value Profile="(Default)">msi-ghost</Value>
+      <Value Profile="(Default)">fcoutard.fr</Value>
     </Setting>
     <Setting Name="FolderRecord" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Users\Public\Documents\Tests Anglais\</Value>

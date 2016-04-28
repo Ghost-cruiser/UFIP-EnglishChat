@@ -75,13 +75,29 @@ namespace UFIP.EngChat.Components.ChatPanel
         }
         #endregion
 
-        #region VIEW-MODEL-BASE            
+
+        #region VIEW-MODEL-BASE        
+        private bool disposedValue = false; // Pour détecter les appels redondants
+
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            ConnectedUser = null;
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: supprimer l'état managé (objets managés).
+                }
+
+                // TODO: libérer les ressources non managées (objets non managés) et remplacer un finaliseur ci-dessous.
+                // TODO: définir les champs de grande taille avec la valeur Null.
+                ConnectedUser = null;
+
+                disposedValue = true;
+            }
+
         }
         #endregion
     }

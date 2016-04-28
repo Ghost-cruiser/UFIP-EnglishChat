@@ -11,12 +11,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="480" 
              d:DesignWidth="600"  Background="{x:Null}">
-    <UserControl.Resources>
-        <ObjectDataProvider 
-            x:Key="data"
-            ObjectType="{x:Static Context:ConversationsSource.Center}">
-        </ObjectDataProvider>
-    </UserControl.Resources>
 
     <DockPanel LastChildFill="True">
 

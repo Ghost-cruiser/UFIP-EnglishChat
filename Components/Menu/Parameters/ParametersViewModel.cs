@@ -135,11 +135,32 @@ namespace UFIP.EngChat.Components.Parameters
             FolderRecord = Properties.Settings.Default.FolderRecord;
             Port = Properties.Settings.Default.Port.ToString();
         }
-        public override void Dispose()
+
+        #region VIEW-MODEL-BASE        
+        private bool disposedValue = false; // Pour détecter les appels redondants
+
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        protected override void Dispose(bool disposing)
         {
-            Hostname = null;
-            FolderRecord = null;
-            OnDisposed();
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: supprimer l'état managé (objets managés).
+                }
+
+                // TODO: libérer les ressources non managées (objets non managés) et remplacer un finaliseur ci-dessous.
+                // TODO: définir les champs de grande taille avec la valeur Null.
+                Hostname = null;
+                FolderRecord = null;
+
+                disposedValue = true;
+                OnDisposed();
+            }
+
         }
+        #endregion
     }
 }

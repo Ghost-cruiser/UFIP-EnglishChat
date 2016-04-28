@@ -99,11 +99,6 @@ namespace UFIP.EngChat.Common.Models
         }
 
         /// <summary>
-        /// The default URI for the user avatar.
-        /// </summary>
-        private string defaultUri = @"/UFIP.EngChat;component/Resources/default_avatar.png";
-
-        /// <summary>
         /// Gets the state of the user : its availibility and its Status message.
         /// </summary>
         /// <value>

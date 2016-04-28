@@ -30,8 +30,8 @@ namespace UFIP.EngChat
                 _login = value;
             }
         }
+
         private Components.ChatPanel.ChatPanelViewModel ChatPanel { get; set; }
-        private Components.Menu.MenuViewModel Menu { get; set; }
 
         private ViewModelBase _sourceView;
         /// <summary>
@@ -42,6 +42,7 @@ namespace UFIP.EngChat
         /// </value>
         public ViewModelBase SourceView
         {
+            
             get
             {
                 return _sourceView;
@@ -54,6 +55,7 @@ namespace UFIP.EngChat
                 }
                 
                 _sourceView = value;
+
                 OnPropertyChanged("SourceView");
             }
         }
@@ -65,8 +67,6 @@ namespace UFIP.EngChat
         /// </summary>
         public MainWindowViewModel()
         {
-            UserSource.Center.PropertyChanged += Center_PropertyChanged;
-
             Login = new Components.Authentication.LoginViewModel();
             Login.Authenticated += On_Authentication;
             SourceView = Login;
@@ -80,6 +80,8 @@ namespace UFIP.EngChat
         /// </summary>
         private void On_Authentication()
         {
+            UserSource.Center.PropertyChanged += Center_PropertyChanged;
+
             Components.Menu.MenuViewModel.Connected = true;
             ChatPanel = new Components.ChatPanel.ChatPanelViewModel();
             SourceView = ChatPanel;
@@ -94,20 +96,37 @@ namespace UFIP.EngChat
         {
             if (e.PropertyName == "Disposed")
             {
+                Components.Menu.MenuViewModel.Connected = false;
+
                 Login = new Components.Authentication.LoginViewModel();
                 Login.Authenticated += On_Authentication;
                 SourceView = Login;
             }
         }
+       
+        #endregion
+        #region VIEW-MODEL-BASE        
+        private bool disposedValue = false; // Pour détecter les appels redondants
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: supprimer l'état managé (objets managés).
+                    SourceView = null; // Setting to null activates the dispose.
+                }
 
-            SourceView = null;
+                // TODO: libérer les ressources non managées (objets non managés) et remplacer un finaliseur ci-dessous.
+                // TODO: définir les champs de grande taille avec la valeur Null.
+
+                disposedValue = true;
+            }
+
         }
         #endregion
     }

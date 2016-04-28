@@ -69,8 +69,8 @@ namespace UFIP.EngChat.Components.Authentication
 
             try
             {
-                XmppService.Initialize(Username, password);
-                OnAuthentication();
+                    XmppService.Initialize(Username, password);
+                    OnAuthentication();
             }
             catch (Exception exception)
             {
@@ -90,15 +90,29 @@ namespace UFIP.EngChat.Components.Authentication
         #endregion
 
         #region VIEW-MODEL-BASE        
+        private bool disposedValue = false; // Pour détecter les appels redondants
+
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: supprimer l'état managé (objets managés).
+                }
 
-            Username = null;
-            LoginAction = null;
+                // TODO: libérer les ressources non managées (objets non managés) et remplacer un finaliseur ci-dessous.
+                // TODO: définir les champs de grande taille avec la valeur Null.
+                Username = null;
+                LoginAction = null;
+                Authenticated = null;
+
+                disposedValue = true;
+            }
+
         }
         #endregion
 

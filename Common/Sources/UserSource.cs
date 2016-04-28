@@ -64,22 +64,53 @@ namespace UFIP.EngChat.Common.Sources
         #region CTOR
         private UserSource()
         {
-
+            _disposed = false;
         }
         #endregion
         
-        public override void Dispose()
+
+
+        #region VIEW-MODEL-BASE   
+
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        protected override void Dispose(bool disposing)
         {
-            Center = null;
-            Disposed = true;
-            base.Dispose();
+            if (!Disposed)
+            {
+                if (disposing)
+                {
+                    // TODO: supprimer l'état managé (objets managés).
+                }
+
+                // TODO: libérer les ressources non managées (objets non managés) et remplacer un finaliseur ci-dessous.
+                // TODO: définir les champs de grande taille avec la valeur Null.
+                Disposed = true;
+            }
+
         }
+        #endregion
     }
 
+    /// <summary>
+    /// Differents possible roles for the user.
+    /// </summary>
     public enum Roles
     {
+        /// <summary>
+        /// The administrateur
+        /// </summary>
         Administrateur = 0,
+
+        /// <summary>
+        /// The professeur
+        /// </summary>
         Professeur = 1,
+
+        /// <summary>
+        /// The eleve
+        /// </summary>
         Eleve = 2
     }
 }
