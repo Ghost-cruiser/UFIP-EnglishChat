@@ -49,18 +49,29 @@ namespace UFIP.EngChat.Common.Libraries
 
         #region ICommand Members
 
+        /// <summary>
+        /// Determines whether this instance can execute the specified parameters.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns></returns>
         [DebuggerStepThrough]
         public bool CanExecute(object parameters)
         {
             return _canExecute == null ? true : _canExecute(parameters);
         }
-
+        /// <summary>
+        /// Occurs when [can execute changed].
+        /// </summary>
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
 
+        /// <summary>
+        /// Executes the specified parameters.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
         public void Execute(object parameters)
         {
             _execute(parameters);

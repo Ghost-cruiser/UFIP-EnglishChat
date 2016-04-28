@@ -8,9 +8,19 @@ using UFIP.EngChat.Common.Libraries;
 
 namespace UFIP.EngChat.Components.Parameters
 {
+    /// <summary>
+    /// ViewModel for the parameters (menu).
+    /// </summary>
+    /// <seealso cref="UFIP.EngChat.Common.Libraries.ViewModelBase" />
     public class ParametersViewModel : ViewModelBase
     {
         private string _hostname;
+        /// <summary>
+        /// Gets or sets the hostname.
+        /// </summary>
+        /// <value>
+        /// The hostname.
+        /// </value>
         public string Hostname
         {
             get
@@ -25,6 +35,12 @@ namespace UFIP.EngChat.Components.Parameters
         }
 
         private string _folderRecord;
+        /// <summary>
+        /// Gets or sets the folder record.
+        /// </summary>
+        /// <value>
+        /// The folder record.
+        /// </value>
         public string FolderRecord
         {
             get
@@ -39,6 +55,12 @@ namespace UFIP.EngChat.Components.Parameters
         }
 
         private string _port;
+        /// <summary>
+        /// Gets or sets the port.
+        /// </summary>
+        /// <value>
+        /// The port.
+        /// </value>
         public string Port
         {
             get
@@ -54,6 +76,12 @@ namespace UFIP.EngChat.Components.Parameters
 
 
         private ICommand _save;
+        /// <summary>
+        /// Exposes the save command.
+        /// </summary>
+        /// <value>
+        /// The save command.
+        /// </value>
         public ICommand Save
         {
             get
@@ -69,13 +97,19 @@ namespace UFIP.EngChat.Components.Parameters
                 return _save;
             }
 
-            set
+            private set
             {
                 _save = value;
             }
         }
 
         private ICommand _return;
+        /// <summary>
+        /// Exposes the return command.
+        /// </summary>
+        /// <value>
+        /// The return.
+        /// </value>
         public ICommand Return
         {
             get
@@ -91,7 +125,7 @@ namespace UFIP.EngChat.Components.Parameters
                 return _return;
             }
 
-            set
+            private set
             {
                 _return = value;
             }
@@ -106,9 +140,17 @@ namespace UFIP.EngChat.Components.Parameters
             Close();
         }
 
+        /// <summary>
+        /// Event handler for the Disposed event.
+        /// </summary>
         public delegate void DisposeHandler();
+        /// <summary>
+        /// Occurs when [disposed].
+        /// </summary>
         public event DisposeHandler Disposed;
-
+        /// <summary>
+        /// Called when [disposed].
+        /// </summary>
         protected virtual void OnDisposed()
         {
             if (Disposed != null)
@@ -128,7 +170,9 @@ namespace UFIP.EngChat.Components.Parameters
             return false;
 
         }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ParametersViewModel"/> class.
+        /// </summary>
         public ParametersViewModel()
         {
             Hostname = Properties.Settings.Default.Host;

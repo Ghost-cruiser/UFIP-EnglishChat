@@ -183,7 +183,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Dist\UFIP EnglishChat 1.0.rar" />
+    <None Include="Dist\UFIP-EngChat.rar" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -198,7 +198,7 @@
     <Resource Include="black_cat_256.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Dist\Procédure d%27installation Chat.txt" />
+    <Resource Include="Documentation\Procédure d%27installation Chat.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\default_avatar.png" />
@@ -219,6 +219,9 @@
     <EmbeddedResource Include="References\S22.Xmpp.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Documentation\Documentation technique.XML" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

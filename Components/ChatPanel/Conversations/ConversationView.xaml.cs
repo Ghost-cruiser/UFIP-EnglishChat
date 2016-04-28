@@ -21,6 +21,9 @@ namespace UFIP.EngChat.Components.ChatPanel.Conversations
     /// </summary>
     public partial class ConversationView : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConversationView"/> class.
+        /// </summary>
         public ConversationView()
         {
             InitializeComponent();

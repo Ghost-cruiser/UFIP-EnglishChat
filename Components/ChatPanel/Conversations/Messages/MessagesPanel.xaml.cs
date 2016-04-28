@@ -21,12 +21,18 @@ namespace UFIP.EngChat.Components.ChatPanel.Conversations.Messages
     /// </summary>
     public partial class MessagesPanel : ItemsControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessagesPanel"/> class.
+        /// </summary>
         public MessagesPanel()
         {
             InitializeComponent();
             ItemTemplateSelector = new MessagesTemplateSelector(this);
         }
-
+        /// <summary>
+        /// Raises the <see cref="E:ItemsChanged" /> event.
+        /// </summary>
+        /// <param name="e">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
             ScrollViewer myScrollviewer = FindVisualChild<ScrollViewer>(this);

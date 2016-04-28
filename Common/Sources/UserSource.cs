@@ -3,13 +3,19 @@
 namespace UFIP.EngChat.Common.Sources
 {
     /// <summary>
-    /// 
+    /// Represents the connected user
     /// </summary>
     /// <seealso cref="UFIP.EngChat.Common.Libraries.ViewModelBase" />
     public class UserSource : Libraries.ViewModelBase
     {
         #region PROP
         private static UserSource _center;
+        /// <summary>
+        /// Exposes the singleton pattern.
+        /// </summary>
+        /// <value>
+        /// UserSource instance.
+        /// </value>
         public static UserSource Center
         {
             get
@@ -18,7 +24,7 @@ namespace UFIP.EngChat.Common.Sources
                     _center = new UserSource();
                 return _center;
             }
-            set
+            private set
             {
                 _center = value;
             }

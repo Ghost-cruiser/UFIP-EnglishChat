@@ -8,6 +8,9 @@ namespace UFIP.EngChat.Components.ChatPanel
     /// </summary>
     public partial class ChatPanelView : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChatPanelView"/> class.
+        /// </summary>
         public ChatPanelView()
         {
             InitializeComponent();

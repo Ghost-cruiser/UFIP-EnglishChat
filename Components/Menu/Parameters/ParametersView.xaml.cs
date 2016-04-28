@@ -19,6 +19,9 @@ namespace UFIP.EngChat.Components.Parameters
     /// </summary>
     public partial class ParametersView : Window
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ParametersView"/> class.
+        /// </summary>
         public ParametersView()
         {
             InitializeComponent();

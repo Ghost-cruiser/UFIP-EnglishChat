@@ -75,7 +75,10 @@ namespace UFIP.EngChat.Common.Libraries
         //   Dispose(false);
         // }
 
-        // Ce code est ajouté pour implémenter correctement le modèle supprimable.
+        // Ce code est ajouté pour implémenter correctement le modèle supprimable.        
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
         public void Dispose()
         {
             // Ne modifiez pas ce code. Placez le code de nettoyage dans Dispose(bool disposing) ci-dessus.

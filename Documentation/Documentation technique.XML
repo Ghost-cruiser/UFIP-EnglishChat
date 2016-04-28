@@ -1,0 +1,1156 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UFIP.EngChat</name>
+    </assembly>
+    <members>
+        <member name="T:UFIP.EngChat.App">
+            <summary>
+            Logique d'interaction pour App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Common.Sources.ContactsSource">
+            <summary>
+            Exposes the list of contact as a singleton.
+            </summary>
+            <seealso cref="T:UFIP.EngChat.Common.Libraries.ViewModelBase" />
+        </member>
+        <member name="P:UFIP.EngChat.Common.Sources.ContactsSource.AllContacts">
+            <summary>
+            Gets or sets all contacts.
+            </summary>
+            <value>
+            All contacts.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Sources.ContactsSource.ConnectedContacts">
+            <summary>
+            Gets or sets the connected contacts.
+            </summary>
+            <value>
+            The connected contacts.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Sources.ContactsSource.Center">
+            <summary>
+            Gets the service. Singleton implementation.
+            </summary>
+            <value>
+            The ContactsSource.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Sources.ContactsSource.SelectedContact">
+            <summary>
+            Gets or sets the selected contact. Implements INotifyPropertyChanged.
+            </summary>
+            <value>
+            The selected contact.
+            </value>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Sources.ContactsSource.GetUser(S22.Xmpp.Jid)">
+            <summary>
+            Gets a user or create it based on its JID.
+            </summary>
+            <param name="jid">The jid.</param>
+            <returns>A user in the Contact List.</returns>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Sources.ContactsSource.UpdateList(System.Boolean,S22.Xmpp.Im.RosterItem)">
+            <summary>
+            Updates the list.
+            </summary>
+            <param name="removed">if set to <c>true</c> the item will be removed.</param>
+            <param name="item">The item to update.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Sources.ContactsSource.UpdateContact(S22.Xmpp.Jid,S22.Xmpp.Im.Status)">
+            <summary>
+            Updates the status contact.
+            </summary>
+            <param name="jid">The jid of the contact.</param>
+            <param name="status">The new status.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Sources.ContactsSource.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Common.Sources.ConversationsSource">
+            <summary>
+            Exposes as a singleton all conversations. 
+            Allow components to be bound to it by implementing the ViewModelBase, and therefore, the INotifyPropertyChanged.
+            </summary>
+            <seealso cref="T:UFIP.EngChat.Common.Libraries.ViewModelBase" />
+        </member>
+        <member name="P:UFIP.EngChat.Common.Sources.ConversationsSource.AllConversations">
+            <summary>
+            Gets or sets all conversations.
+            </summary>
+            <value>
+            Observable Collection of all the conversations.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Sources.ConversationsSource.Center">
+            <summary>
+            Gets the service. Instanciate itself
+            </summary>
+            <value>
+            The ConversationsSource.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Sources.ConversationsSource.SelectedConversation">
+            <summary>
+            Gets or sets the selected conversation.
+            </summary>
+            <value>
+            View model of the selected conversation.
+            </value>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Sources.ConversationsSource.ReceiveMessage(S22.Xmpp.Im.Message,S22.Xmpp.Jid)">
+            <summary>
+            Handles the reception of a message.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="jid">The jid of the sender.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Sources.ConversationsSource.CreateConversation(UFIP.EngChat.Common.Models.UserViewModel,S22.Xmpp.Im.Message)">
+            <summary>
+            Creates a conversation for a contact.
+            </summary>
+            <param name="contact">The contact.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Sources.ConversationsSource.SelectConversation(UFIP.EngChat.Common.Models.UserViewModel)">
+            <summary>
+            Selects the conversation using the list of contact if it was not instanciated yet.
+            Modification of the selected conversation must use this fonction
+            </summary>
+            <param name="contact">The contact to chat with.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Sources.ConversationsSource.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Common.Sources.UserSource">
+            <summary>
+            Represents the connected user
+            </summary>
+            <seealso cref="T:UFIP.EngChat.Common.Libraries.ViewModelBase" />
+        </member>
+        <member name="P:UFIP.EngChat.Common.Sources.UserSource.Center">
+            <summary>
+            Exposes the singleton pattern.
+            </summary>
+            <value>
+            UserSource instance.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Sources.UserSource.Role">
+            <summary>
+            Gets or sets the role.
+            </summary>
+            <value>
+            The role of the user.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Sources.UserSource.ConnectedUser">
+            <summary>
+            Gets or sets the connected user.
+            </summary>
+            <value>
+            The connected user.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Sources.UserSource.Disposed">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:UFIP.EngChat.Common.Sources.UserSource"/> is disposed.
+            </summary>
+            <value>
+              <c>true</c> if disposed; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Sources.UserSource.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Common.Sources.Roles">
+            <summary>
+            Differents possible roles for the user.
+            </summary>
+        </member>
+        <member name="F:UFIP.EngChat.Common.Sources.Roles.Administrateur">
+            <summary>
+            The administrateur
+            </summary>
+        </member>
+        <member name="F:UFIP.EngChat.Common.Sources.Roles.Professeur">
+            <summary>
+            The professeur
+            </summary>
+        </member>
+        <member name="F:UFIP.EngChat.Common.Sources.Roles.Eleve">
+            <summary>
+            The eleve
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Common.Models.Conversation">
+            <summary>
+            Conversation between two users.
+            </summary>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Models.Conversation.CurrentContact">
+            <summary>
+            Gets or sets the current contact.
+            </summary>
+            <value>
+            The current contact.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Models.Conversation.Messages">
+            <summary>
+            Gets or sets the messages. Initializes automaticly.
+            </summary>
+            <value>
+            The messages.
+            </value>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Models.Conversation.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Common.Models.Conversation"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Models.Conversation.#ctor(UFIP.EngChat.Common.Models.UserViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Common.Models.Conversation"/> class.
+            </summary>
+            <param name="contact">The current contact.</param>
+        </member>
+        <member name="T:UFIP.EngChat.Common.Models.UserViewModel">
+            <summary>
+            View-Model for a user.
+            </summary>
+            <seealso cref="T:UFIP.EngChat.Common.Libraries.ViewModelBase" />
+        </member>
+        <member name="P:UFIP.EngChat.Common.Models.UserViewModel.Name">
+            <summary>
+            Gets or sets the name of the user.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Models.UserViewModel.Jid">
+            <summary>
+            Gets or sets the jid of the user.
+            </summary>
+            <value>
+            The jid.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Models.UserViewModel.CurrentStatus">
+            <summary>
+            Gets or sets the current status of the user. 
+            </summary>
+            <value>
+            The current status.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Models.UserViewModel.UserAvatar">
+            <summary>
+            Gets or sets the user avatar. Default only for the moment.
+            </summary>
+            <value>
+            The user avatar.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Models.UserViewModel.UserColor">
+            <summary>
+            Gets or sets the color expressing the status.
+            </summary>
+            <value>
+            The color of the user's status.
+            </value>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Models.UserViewModel.getUserColor(S22.Xmpp.Im.Availability)">
+            <summary>
+            Return a color depending on the availability. Online / Offline only implemented for the moment.
+            </summary>
+            <param name="availability">The availability.</param>
+            <returns>The color matching the status</returns>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Models.UserViewModel.State">
+            <summary>
+            Gets the state of the user : its availibility and its Status message.
+            </summary>
+            <value>
+            A string representing the user's state.
+            </value>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Models.UserViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Common.Models.UserViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Models.UserViewModel.#ctor(S22.Xmpp.Jid,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Common.Models.UserViewModel"/> class.
+            </summary>
+            <param name="jid">The jid.</param>
+            <param name="username">The username.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Models.UserViewModel.op_Implicit(S22.Xmpp.Im.RosterItem)~UFIP.EngChat.Common.Models.UserViewModel">
+            <summary>
+            Performs an implicit conversion from <see cref="T:S22.Xmpp.Im.RosterItem"/> to <see cref="T:UFIP.EngChat.Common.Models.UserViewModel"/>.
+            </summary>
+            <param name="item">The RosterItem.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="T:UFIP.EngChat.Common.Libraries.RelayCommand">
+            <summary>
+            A command whose sole purpose is to 
+            relay its functionality to other
+            objects by invoking delegates. The
+            default return value for the CanExecute
+            method is 'true'.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Libraries.RelayCommand.#ctor(System.Action{System.Object})">
+            <summary>
+            Creates a new command that can always execute.
+            </summary>
+            <param name="execute">The execution logic.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Libraries.RelayCommand.#ctor(System.Action{System.Object},System.Predicate{System.Object})">
+            <summary>
+            Creates a new command.
+            </summary>
+            <param name="execute">The execution logic.</param>
+            <param name="canExecute">The execution status logic.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Libraries.RelayCommand.CanExecute(System.Object)">
+            <summary>
+            Determines whether this instance can execute the specified parameters.
+            </summary>
+            <param name="parameters">The parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="E:UFIP.EngChat.Common.Libraries.RelayCommand.CanExecuteChanged">
+            <summary>
+            Occurs when [can execute changed].
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Libraries.RelayCommand.Execute(System.Object)">
+            <summary>
+            Executes the specified parameters.
+            </summary>
+            <param name="parameters">The parameters.</param>
+        </member>
+        <member name="T:UFIP.EngChat.Common.Libraries.UICollection">
+            <summary>
+            Exposes functions that allows threads to trigger propertyChanged.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Libraries.UICollection.AddOnUI``1(System.Collections.Generic.ICollection{``0},``0)">
+            <summary>
+            Adds the item of a collection bound to the UI.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection">The collection.</param>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Libraries.UICollection.RemoveOnUI``1(System.Collections.Generic.ICollection{``0},``0)">
+            <summary>
+            Removes the item of a collection bound to the UI.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection">The collection.</param>
+            <param name="item">The item.</param>
+        </member>
+        <member name="T:UFIP.EngChat.Common.Libraries.ViewModelBase">
+            <summary>
+            Base for ViewModels. Implements INotifyPropertyChanged and IDisposable.
+            </summary>
+            <seealso cref="T:System.IDisposable" />
+            <seealso cref="T:System.ComponentModel.INotifyPropertyChanged" />
+        </member>
+        <member name="P:UFIP.EngChat.Common.Libraries.ViewModelBase.DisplayName">
+            <summary>
+            Gets or sets the display name.
+            </summary>
+            <value>
+            The display name.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Libraries.ViewModelBase.ThrowOnInvalidPropertyName">
+            <summary>
+            Gets or sets a value indicating whether [throw on invalid property name].
+            </summary>
+            <value>
+            <c>true</c> if [throw on invalid property name]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="E:UFIP.EngChat.Common.Libraries.ViewModelBase.PropertyChanged">
+            <summary>
+            Occurs when [property changed].
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Libraries.ViewModelBase.OnPropertyChanged(System.String)">
+            <summary>
+            Called when [property changed].
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Libraries.ViewModelBase.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Libraries.ViewModelBase.Dispose">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Common.Core.XmppService">
+            <summary>
+            Singleton exposing the xmpp library. Handles its connection and its events.
+            Fills the contexts
+            </summary>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Core.XmppService.Client">
+            <summary>
+            Exposes one xmpp client.
+            </summary>
+            <value>
+            The current instance of the client. Must be initialized first.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Core.XmppService.Hostname">
+            <summary>
+            Gets the hostname to connect to directly from the current parameters.
+            </summary>
+            <value>
+            The hostname defined in the parameters.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Common.Core.XmppService.Port">
+            <summary>
+            Gets the port to connect to directly from the current parameters.
+            </summary>
+            <value>
+            The hostname defined in the parameters.
+            </value>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Core.XmppService.Initialize(System.String,System.String)">
+            <summary>
+            Initializes the client with the specified username and password.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns>The XMPP service.</returns>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Core.XmppService.SendMessage(S22.Xmpp.Im.Message)">
+            <summary>
+            Sends the message to the connected server.
+            </summary>
+            <param name="message">The message format xmpp to send.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Core.XmppService.Disconnect">
+            <summary>
+            Disconnects the instance of the client. Dispose all sources.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Core.XmppService.HydrateContexts">
+            <summary>
+            Hydrates the contexts : provide all datas to the singletons providing the contexts of the application.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Core.XmppService.HandleMessage(System.Object,S22.Xmpp.Im.MessageEventArgs)">
+            <summary>
+            Handles the reception of a message.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:S22.Xmpp.Im.MessageEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Core.XmppService.LibClient_RosterUpdated(System.Object,S22.Xmpp.Im.RosterUpdatedEventArgs)">
+            <summary>
+            Handles a change in the contact list when the event is sent by the XMPP client.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:S22.Xmpp.Im.RosterUpdatedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Core.XmppService.LibClient_StatusChanged(System.Object,S22.Xmpp.Im.StatusEventArgs)">
+            <summary>
+            Handles a change of status when the event is triggered by the XMPP client.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:S22.Xmpp.Im.StatusEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Core.XmppService.LoadAwaitingStatus">
+            <summary>
+            Load the awaiting status threw a task using loadAwaitingStatus.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Core.XmppService.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Common.Core.XmppService.Dispose">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Components.Authentication.LoginView">
+            <summary>
+            LoginView.xaml interacts with its datacontext binding the username (:Username), 
+            and passing its passwordBox to the bound command (:LoginAction).
+            </summary>
+            <summary>
+            LoginView
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Authentication.LoginView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.Authentication.LoginView"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Authentication.LoginView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Components.Authentication.LoginViewModel">
+            <summary>
+            ViewModel for LoginView.xaml : handles connexion to the server.
+            </summary>
+            <seealso cref="T:UFIP.EngChat.Common.Libraries.ViewModelBase" />
+        </member>
+        <member name="P:UFIP.EngChat.Components.Authentication.LoginViewModel.Username">
+            <summary>
+            Gets or sets the username.
+            </summary>
+            <value>
+            The username.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.Authentication.LoginViewModel.LoginAction">
+            <summary>
+            Exposes the command that allow to log in.
+            </summary>
+            <value>
+            Command : Login(passwordBox) - CanLogin()
+            </value>
+        </member>
+        <member name="T:UFIP.EngChat.Components.Authentication.LoginViewModel.AuthHandler">
+            <summary>
+            Handles authentication.
+            </summary>
+        </member>
+        <member name="E:UFIP.EngChat.Components.Authentication.LoginViewModel.Authenticated">
+            <summary>
+            Occurs when [authenticated].
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Authentication.LoginViewModel.OnAuthentication">
+            <summary>
+            Called when [authentication].
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Authentication.LoginViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.Authentication.LoginViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Authentication.LoginViewModel.Login(System.Object)">
+            <summary>
+            Login using the password of the passwordBox.
+            </summary>
+            <param name="parameter">The passwordBox of the view.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Authentication.LoginViewModel.CanLogin">
+            <summary>
+            Determines whether this instance can login.
+            </summary>
+            <returns> <c>true</c> if the username is not null, neither empty or white spaces only ; otherwise, <c>false</c></returns>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Authentication.LoginViewModel.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Components.ChatPanel.Contacts.UserView">
+            <summary>
+            Logique d'interaction pour UserWidget.xaml
+            </summary>
+            <summary>
+            UserView
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Contacts.UserView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.ChatPanel.Contacts.UserView"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Contacts.UserView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelView">
+            <summary>
+            NotationView.xaml interacts with its datacontext binding the note (:Note) 
+            given to the conversation; and binding the command (:Record) to the button
+            </summary>
+            <summary>
+            NotationPanelView
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelView"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelViewModel">
+            <summary>
+            A view model of the panel of notation. Allow a teacher to record and note a conversation.
+            </summary>
+            <seealso cref="T:UFIP.EngChat.Common.Libraries.ViewModelBase" />
+        </member>
+        <member name="P:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelViewModel.Note">
+            <summary>
+            Gets or sets the note for the conversation.
+            </summary>
+            <value>
+            The note.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelViewModel.Color">
+            <summary>
+            Gets or sets the color.
+            </summary>
+            <value>
+            The color representing the state of the last attempt to record =
+            if <c>blue</c> : none, 
+            if <c>green</c> : success, 
+            if <c>red</c>: failure.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelViewModel.Record">
+            <summary>
+            Exposes the record command.
+            </summary>
+            <value>
+            Command : RecordConversation() - CanRecord().
+            </value>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelViewModel.RecordConversation">
+            <summary>
+            Records the conversation.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelViewModel.CanRecord">
+            <summary>
+            Determines whether the conversation can be recorded.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Notation.NotationPanelViewModel.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Components.ChatPanel.Notation.NotationService">
+            <summary>
+            Service allowing a teacher to record and affect a note to a conversation.
+            The folder must be set in the parameters.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Notation.NotationService.WriteConversation(System.Collections.Generic.List{S22.Xmpp.Im.Message},System.String,S22.Xmpp.Jid,System.String)">
+            <summary>
+            Writes the conversation into a text filer created in the folder set in parameters.
+            Constructs the conversation to allow identification of the speaker.
+            </summary>
+            <param name="messages">The messages exchanged.</param>
+            <param name="Note">The note given by the teacher.</param>
+            <param name="jid">The jid of the student .</param>
+            <param name="contactName">The name of the student.</param>
+        </member>
+        <member name="T:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationView">
+            <summary>
+            ConversationView.xaml is a Tabitem representing a conversation between a user and one of his contact.
+            Interacts with a ConversationViewModel.
+            </summary>
+            <summary>
+            ConversationView
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationView"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel">
+            <summary>
+            ViewModel for a conversation. Is used for the ConversationsSource.SelectedConversation only.
+            </summary>
+            <seealso cref="T:UFIP.EngChat.Common.Libraries.ViewModelBase" />
+        </member>
+        <member name="P:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel.CurrentContact">
+            <summary>
+            Gets or sets the current contact.
+            </summary>
+            <value>
+            The current contact.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel.Messages">
+            <summary>
+            Gets or sets the messages.
+            </summary>
+            <value>
+            The messages.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel.MessageWritten">
+            <summary>
+            Gets or sets the message being written by the user. Implements OnPropertyChanged.
+            </summary>
+            <value>
+            The message written by the user.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel.Send">
+            <summary>
+            Exposes the send command.
+            </summary>
+            <value>
+            Command : SendMessage() - if CanSend()
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel.TeacherTools">
+            <summary>
+            Gets the teacher tools. Instanciated if user is a teacher.
+            </summary>
+            <value>
+            View-Model of the NotationPanel
+            </value>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel.#ctor(UFIP.EngChat.Common.Models.UserViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel"/> class.
+            </summary>
+            <param name="contact">The contact the conversation is currently with.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel.AddMessage(S22.Xmpp.Im.Message)">
+            <summary>
+            Adds the message received. Called by external thread.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel.SendMessage">
+            <summary>
+            Try to sends the message written. MessageBox on error
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel.CanSend">
+            <summary>
+            Determines whether the message written is empty or not.
+            </summary>
+            <returns><c>true</c> if message is not null, empty, or white spaces; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel.op_Implicit(UFIP.EngChat.Common.Models.Conversation)~UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel">
+            <summary>
+            Performs an implicit conversion from <see cref="T:UFIP.EngChat.Common.Models.Conversation"/> to <see cref="T:UFIP.EngChat.Components.ChatPanel.Conversations.ConversationViewModel"/>.
+            </summary>
+            <param name="conversation">The conversation to be converted.</param>
+            <returns>
+            The ConversationViewModel converted from the conversation.
+            </returns>
+        </member>
+        <member name="T:UFIP.EngChat.Components.ChatPanel.Conversations.Messages.MessagesPanel">
+            <summary>
+            Logique d'interaction pour ListBoxMessages.xaml
+            </summary>
+            <summary>
+            MessagesPanel
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.Messages.MessagesPanel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.ChatPanel.Conversations.Messages.MessagesPanel"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.Messages.MessagesPanel.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            Raises the <see cref="E:ItemsChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.Messages.MessagesPanel.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Components.ChatPanel.Conversations.Messages.MessagesTemplateSelector">
+            <summary>
+            Selects the template to use for a message, depending on if the user is the sender or not.
+            </summary>
+            <seealso cref="T:System.Windows.Controls.DataTemplateSelector" />
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.Messages.MessagesTemplateSelector.#ctor(UFIP.EngChat.Components.ChatPanel.Conversations.Messages.MessagesPanel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.ChatPanel.Conversations.Messages.MessagesTemplateSelector"/> class.
+            </summary>
+            <param name="caller">The caller.</param>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.Conversations.Messages.MessagesTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+            <summary>
+            Selects the template.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="container">The container.</param>
+            <returns></returns>
+        </member>
+        <member name="T:UFIP.EngChat.Components.ChatPanel.ChatPanelViewModel">
+            <summary>
+            A view model of the Chat. MainView of the components.
+            </summary>
+            <seealso cref="T:UFIP.EngChat.Common.Libraries.ViewModelBase" />
+        </member>
+        <member name="P:UFIP.EngChat.Components.ChatPanel.ChatPanelViewModel.ConnectedUser">
+            <summary>
+            Gets the connected user. Initializes through <seealso cref="T:UFIP.EngChat.Common.Sources.UserSource"/>
+            </summary>
+            <value>
+            The current user.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.ChatPanel.ChatPanelViewModel.ServiceConversations">
+            <summary>
+            Exposes the source of conversations. Initializes through <seealso cref="T:UFIP.EngChat.Common.Sources.ConversationsSource"></seealso>
+            </summary>
+            <value>
+            The service conversations.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.ChatPanel.ChatPanelViewModel.SelectedContact">
+            <summary>
+            Gets or sets the selected contact.
+            </summary>
+            <value>
+            The selected contact.
+            </value>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.ChatPanelViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.ChatPanel.ChatPanelViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.ChatPanelViewModel.UpdateSelectedConversation">
+            <summary>
+            Updates the selected conversation.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.ChatPanelViewModel.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Components.ChatPanel.ChatPanelView">
+            <summary>
+            Logique d'interaction pour UserPanelView.xaml
+            </summary>
+            <summary>
+            ChatPanelView
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.ChatPanelView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.ChatPanel.ChatPanelView"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.ChatPanel.ChatPanelView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Components.Menu.MenuViewModel">
+            <summary>
+            View-Model for menu.
+            </summary>
+        </member>
+        <member name="P:UFIP.EngChat.Components.Menu.MenuViewModel.Connected">
+            <summary>
+            Gets or sets a value indicating whether the client is connected.
+            </summary>
+            <value>
+              <c>true</c> if connected; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.Menu.MenuViewModel.Parameters">
+            <summary>
+            Gets the parameters of the application.
+            </summary>
+            <value>
+            Command : ShowParameter() - always
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.Menu.MenuViewModel.Deconnexion">
+            <summary>
+            Exposes the deconnexion command.
+            </summary>
+            <value>
+            Command : Deconnect() - if Connected.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.Menu.MenuViewModel.Leave">
+            <summary>
+            Gets the leave command.
+            </summary>
+            <value>
+            Command : CloseApplication() - always.
+            </value>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Menu.MenuViewModel.Disconnect">
+            <summary>
+            Disconnects the client.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Menu.MenuViewModel.ShowParameters">
+            <summary>
+            Shows the parameters of the application in a new window.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Menu.MenuViewModel.CloseApplication">
+            <summary>
+            Closes the application.
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Components.Parameters.ParametersView">
+            <summary>
+            Logique d'interaction pour Parameters.xaml
+            </summary>
+            <summary>
+            ParametersView
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Parameters.ParametersView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.Parameters.ParametersView"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Parameters.ParametersView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Components.Parameters.ParametersViewModel">
+            <summary>
+            ViewModel for the parameters (menu).
+            </summary>
+            <seealso cref="T:UFIP.EngChat.Common.Libraries.ViewModelBase" />
+        </member>
+        <member name="P:UFIP.EngChat.Components.Parameters.ParametersViewModel.Hostname">
+            <summary>
+            Gets or sets the hostname.
+            </summary>
+            <value>
+            The hostname.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.Parameters.ParametersViewModel.FolderRecord">
+            <summary>
+            Gets or sets the folder record.
+            </summary>
+            <value>
+            The folder record.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.Parameters.ParametersViewModel.Port">
+            <summary>
+            Gets or sets the port.
+            </summary>
+            <value>
+            The port.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.Parameters.ParametersViewModel.Save">
+            <summary>
+            Exposes the save command.
+            </summary>
+            <value>
+            The save command.
+            </value>
+        </member>
+        <member name="P:UFIP.EngChat.Components.Parameters.ParametersViewModel.Return">
+            <summary>
+            Exposes the return command.
+            </summary>
+            <value>
+            The return.
+            </value>
+        </member>
+        <member name="T:UFIP.EngChat.Components.Parameters.ParametersViewModel.DisposeHandler">
+            <summary>
+            Event handler for the Disposed event.
+            </summary>
+        </member>
+        <member name="E:UFIP.EngChat.Components.Parameters.ParametersViewModel.Disposed">
+            <summary>
+            Occurs when [disposed].
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Parameters.ParametersViewModel.OnDisposed">
+            <summary>
+            Called when [disposed].
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Parameters.ParametersViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.Components.Parameters.ParametersViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.Components.Parameters.ParametersViewModel.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.MainWindow">
+            <summary>
+            Logique d'interaction pour MainWindow.xaml
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.MainWindow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.MainWindow"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.MainWindowViewModel">
+            <summary>
+            Main View-Model of the application.
+            </summary>
+            <seealso cref="T:UFIP.EngChat.Common.Libraries.ViewModelBase" />
+        </member>
+        <member name="P:UFIP.EngChat.MainWindowViewModel.SourceView">
+            <summary>
+            Gets or sets the source view of the main panel. Implements OnPropertyChanged
+            </summary>
+            <value>
+            The active ViewModel.
+            </value>
+        </member>
+        <member name="M:UFIP.EngChat.MainWindowViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:UFIP.EngChat.MainWindowViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.MainWindowViewModel.On_Authentication">
+            <summary>
+            Handles the success of the connectinon.
+            </summary>
+        </member>
+        <member name="M:UFIP.EngChat.MainWindowViewModel.Center_PropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Handles the the disposal of the source user, traducting a deconnection.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:UFIP.EngChat.MainWindowViewModel.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="T:UFIP.EngChat.Properties.Resources">
+            <summary>
+              Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
+            </summary>
+        </member>
+        <member name="P:UFIP.EngChat.Properties.Resources.ResourceManager">
+            <summary>
+              Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
+            </summary>
+        </member>
+        <member name="P:UFIP.EngChat.Properties.Resources.Culture">
+            <summary>
+              Remplace la propriété CurrentUICulture du thread actuel pour toutes
+              les recherches de ressources à l'aide de cette classe de ressource fortement typée.
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

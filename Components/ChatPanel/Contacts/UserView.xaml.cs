@@ -20,6 +20,9 @@ namespace UFIP.EngChat.Components.ChatPanel.Contacts
     /// </summary>
     public partial class UserView : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserView"/> class.
+        /// </summary>
         public UserView()
         {
             InitializeComponent();
