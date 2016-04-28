@@ -1,0 +1,18 @@
+Serveur :
+
+Télécharger Openfire 4.0.2 à l'adresse : http://www.igniterealtime.org/downloads/download-landing.jsp?file=openfire/openfire_4_0_2.exe
+
+Procéder à l'installation de Openfire sur votre serveur tel qu'indiqué  à : http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/install-guide.html .
+
+Si vous le souhaitez, vous pouvez suivre la procédure pour obtenir la liste des utilisateurs à partir d'une base de données existante ; consultez
+ http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integration-guide.html pour plus d'informations.
+
+Dans la liste des groupes (ou dans les groupes définies dans votre base de données), ajouter un groupe, dont la liste est partagée avec le groupe défini pour vos professeurs.
+Dans ce groupe, ajouter "echoprofesseurs", en respectant l'orthographe. Sans ce paramètre, vos professeurs ne pourront noter les élèves.
+
+Client :
+Dézipper dans le dossier d'installation de votre choix (préférez C:\\ufip-engchat pour éviter tout conflit de droits sur la machine
+
+Lancer l'exécutable ; dans paramètres, régler l'adresse en entrant le nom de votre serveur Openfire. Attention: le serveur et le client doivent être sur le même réseau.
+
+Entrer votre nom d'utilisateur et votre mot de passe,  puis se connecter.

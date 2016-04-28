@@ -197,7 +197,9 @@
   <ItemGroup>
     <Resource Include="black_cat_256.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Dist\Procédure d%27installation Chat.txt" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\default_avatar.png" />
   </ItemGroup>
