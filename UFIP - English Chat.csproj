@@ -92,10 +92,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Components\ChatPanel\Notation\NotationPanelView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Components\Menu\Parameters\ParametersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,11 +133,6 @@
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\Menu\MenuViewModel.cs" />
-    <Compile Include="Components\ChatPanel\Notation\NotationPanelView.xaml.cs">
-      <DependentUpon>NotationPanelView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Components\ChatPanel\Notation\NotationPanelViewModel.cs" />
-    <Compile Include="Components\ChatPanel\Notation\NotationService.cs" />
     <Compile Include="Components\Menu\Parameters\ParametersView.xaml.cs">
       <DependentUpon>ParametersView.xaml</DependentUpon>
     </Compile>
@@ -216,7 +207,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="References\S22.Xmpp.dll">
+    <EmbeddedResource Include="S22.Xmpp.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

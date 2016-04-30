@@ -77,25 +77,7 @@ namespace UFIP.EngChat.Components.ChatPanel.Conversations
                 _send = value;
             }
         }
-
-        private Notation.NotationPanelViewModel _teacherTools;
-        /// <summary>
-        /// Gets the teacher tools. Instanciated if user is a teacher.
-        /// </summary>
-        /// <value>
-        /// View-Model of the NotationPanel
-        /// </value>
-        public Notation.NotationPanelViewModel TeacherTools
-        {
-            get
-            {
-                return _teacherTools;
-            }
-            private set
-            {
-                _teacherTools = value;
-            }
-        }
+        
         #endregion
 
 
@@ -109,12 +91,6 @@ namespace UFIP.EngChat.Components.ChatPanel.Conversations
             Messages = new ObservableCollection<Message>();
             CurrentContact = contact;
             MessageWritten = "";
-
-            if (UserSource.Center.Role == Roles.Professeur)
-            {
-                // TODO : change CTOR -> Should be a singleton
-                TeacherTools = new Notation.NotationPanelViewModel();
-            }
         }
         #endregion
 
@@ -174,8 +150,6 @@ namespace UFIP.EngChat.Components.ChatPanel.Conversations
                     // TODO: supprimer l'état managé (objets managés).
                     if (CurrentContact != null)
                         CurrentContact.Dispose();
-                    if (TeacherTools != null)
-                        TeacherTools.Dispose();
                 }
 
                 // TODO: libérer les ressources non managées (objets non managés) et remplacer un finaliseur ci-dessous.

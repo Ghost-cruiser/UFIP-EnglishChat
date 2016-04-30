@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:UFIP.EngChat.Components.ChatPanel"
              xmlns:Context="clr-namespace:UFIP.EngChat.Common.Sources"
              xmlns:Contacts="clr-namespace:UFIP.EngChat.Components.ChatPanel.Contacts"
-             xmlns:Notation="clr-namespace:UFIP.EngChat.Components.ChatPanel.Notation"
              xmlns:Conversations="clr-namespace:UFIP.EngChat.Components.ChatPanel.Conversations" x:Class="UFIP.EngChat.Components.ChatPanel.ChatPanelView"
              mc:Ignorable="d" 
              d:DesignHeight="480" 
