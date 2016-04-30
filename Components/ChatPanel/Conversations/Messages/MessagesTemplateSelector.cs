@@ -1,9 +1,4 @@
 ﻿using S22.Xmpp.Im;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace UFIP.EngChat.Components.ChatPanel.Conversations.Messages
