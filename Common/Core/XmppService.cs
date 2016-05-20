@@ -55,10 +55,6 @@ namespace UFIP.EngChat.Common.Core
             LibClient = new XmppClient(Hostname, Port, false);
             LibClient.Connect();
         }
-        private MethodInfo method { get; set; }
-        private RemoteCertificateValidationCallback cb = delegate {
-            return true;
-        };
 
         private XmppService(string username, string password)
         {
