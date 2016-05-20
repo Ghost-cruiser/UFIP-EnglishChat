@@ -65,15 +65,8 @@ namespace UFIP.EngChat.Common.Core
             LibClient.Message += HandleMessage;
             LibClient.RosterUpdated += LibClient_RosterUpdated;
             LibClient.StatusChanged += LibClient_StatusChanged;
-
-            if(!LibClient.Authenticated)
-            {
-                LibClient = new XmppClient(Hostname, Port, false);
-                LibClient.Connect();
-                LibClient.Authenticate(username, password);
-            }
-            else
-                LibClient.Connect();
+            
+            LibClient.Connect();
         }
 
         /// <summary>
