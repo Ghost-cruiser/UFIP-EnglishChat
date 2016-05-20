@@ -92,6 +92,7 @@ namespace UFIP.EngChat.Common.Sources
 
                 // TODO: libérer les ressources non managées (objets non managés) et remplacer un finaliseur ci-dessous.
                 // TODO: définir les champs de grande taille avec la valeur Null.
+                _center = null;
                 Disposed = true;
             }
 

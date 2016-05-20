@@ -186,6 +186,7 @@ namespace UFIP.EngChat.Common.Sources
                 // TODO: définir les champs de grande taille avec la valeur Null.
                 AllContacts = null;
                 ConnectedContacts = null;
+                _center = null;
 
                 disposedValue = true;
             }
