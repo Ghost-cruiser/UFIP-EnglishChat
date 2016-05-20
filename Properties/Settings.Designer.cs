@@ -25,7 +25,7 @@ namespace UFIP.EngChat.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("fcoutard.fr")]
+        [global::System.Configuration.DefaultSettingValueAttribute("msi-ghost")]
         public string Host {
             get {
                 return ((string)(this["Host"]));

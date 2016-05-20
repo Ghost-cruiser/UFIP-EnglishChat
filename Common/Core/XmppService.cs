@@ -76,8 +76,8 @@ namespace UFIP.EngChat.Common.Core
                 LibClient.Connect();
                 LibClient.Authenticate(username, password);
             }
-
-            LibClient.Connect();
+            else
+                LibClient.Connect();
         }
 
         /// <summary>
